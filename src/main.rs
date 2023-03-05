@@ -3,13 +3,18 @@ use actix_web::{
     web::{self},
     App, HttpRequest, HttpServer, Responder,
 };
+
+use actix_cors::Cors;
+
 use std::fs;
 
 mod sites;
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let server = HttpServer::new(|| {
-        let mut app = App::new();
+        let cors = Cors::default();
+
+        let mut app = App::new().wrap(cors);
 
         app = app.service(web::resource("/photos").route(web::get().to(sites::photos)));
 
