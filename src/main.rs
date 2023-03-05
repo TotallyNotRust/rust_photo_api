@@ -13,7 +13,7 @@ mod sites;
 async fn main() -> std::io::Result<()> {
     let server = HttpServer::new(|| {
         let cors = Cors::default()
-            .allowed_origin("127.0.0.1")
+            .allowed_origin("*")
             .allowed_headers(vec!["Authorization"])
             .allowed_methods(vec!["GET", "POST"]);
 
