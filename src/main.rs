@@ -11,9 +11,11 @@ use std::fs;
 mod sites;
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    std::env::set_var("ACTIX_WEB_ORIGIN", "*"); // <-- set allowed origin to *
+
     let server = HttpServer::new(|| {
         let cors = Cors::default()
-            .allowed_origin("*")
+            .allow_any_origin()
             .allowed_headers(vec!["Authorization"])
             .allowed_methods(vec!["GET", "POST"]);
 
